@@ -8,9 +8,9 @@
 
 def selects_the_titles_of_all_projects_and_their_pledge_amounts_alphabetized_by_title
   "SELECT projects.title, SUM(pledges.amount) FROM projects
-JOIN pledges ON pledges.project_id = projects.id
-GROUP BY projects.title
-ORDER BY projects.title"
+  JOIN pledges ON pledges.project_id = projects.id
+  GROUP BY projects.title
+  ORDER BY projects.title"
 end
 
 def selects_the_user_name_age_and_pledge_amount_for_all_pledges_alphabetized_by_name
@@ -21,15 +21,18 @@ def selects_the_user_name_age_and_pledge_amount_for_all_pledges_alphabetized_by_
 end
 
 def selects_the_titles_and_amount_over_goal_of_all_projects_that_have_met_their_funding_goal
-"SELECT projects.title, SUM(pledges.amount)-projects.funding_goal AS diff FROM pledges
-JOIN projects ON projects.id = pledges.project_id
-GROUP BY pledges.project_id
-HAVING diff >= 0
-ORDER BY projects.title"
+  "SELECT projects.title, SUM(pledges.amount)-projects.funding_goal AS diff FROM pledges
+  JOIN projects ON projects.id = pledges.project_id
+  GROUP BY pledges.project_id
+  HAVING diff >= 0
+  ORDER BY projects.title"
 end
 
 def selects_user_names_and_amounts_of_all_pledges_grouped_by_name_then_orders_them_by_the_summed_amount
-  "Write your SQL query Here"
+  "SELECT users.name, SUM(pledges.amount) FROM pledges
+  JOIN users ON users.id = pledges.user_id
+  GROUP BY users.name
+  ORDER BY SUM(pledges.amount), users.name"
 end
 
 def selects_the_category_names_and_pledge_amounts_of_all_pledges_in_the_music_category
